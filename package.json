@@ -1,17 +1,25 @@
 {
-  "name": "soundcloud-auth-parse",
+  "name": "@nataliacs/soundcloud-auth-parse",
   "version": "1.0.0",
-  "description": "",
-  "main": "AuthAdapter.js",
+  "description": "Soundcloud OAuth to Parse Server Adapter",
+  "main": "adapter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nataliaconde/soundcloud-auth-parse.git"
+  },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Natália Condê <natalia.csouza98@outlook.com>",
+  "license": "MIT",
   "dependencies": {
     "crypto": "^1.0.1",
     "https": "^1.0.0",
     "parse": "^2.1.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/nataliaconde/soundcloud-auth-parse/issues"
+  },
+  "homepage": "https://github.com/nataliaconde/soundcloud-auth-parse#readme"
 }
