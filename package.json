@@ -1,0 +1,17 @@
+{
+  "name": "soundcloud-auth-parse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "AuthAdapter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "https": "^1.0.0",
+    "parse": "^2.1.0"
+  }
+}
