@@ -4,7 +4,7 @@ const httpsRequest = require('./httpsRequest');
 
 // Returns a promise that fulfills iff this user id is valid.
 function validateAuthData(authData) {
-  return soundcloudRequest('/me?client_id=' + authData.auth_data).then( response => {
+  return soundcloudRequest('/me?oauth_token=' + authData.access_token).then( response => {
     
     if (data && (response.id == authData.id)) {
       return;
