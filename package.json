@@ -14,7 +14,6 @@
   "author": "Natália Condê <natalia.csouza98@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "crypto": "^1.0.1",
     "https": "^1.0.0",
     "parse": "^2.1.0"
   },

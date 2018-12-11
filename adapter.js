@@ -1,5 +1,4 @@
 // Helper functions for accessing the Soundcloud API.
-var OAuth = require('./OAuth1Client');
 var Parse = require('parse/node').Parse;
 const httpsRequest = require('./httpsRequest');
 
