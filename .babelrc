@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "4.5"
+        },
+        "exclude": [
+          "transform-es2015-classes"
+        ]
+      }
+    ],
+    {
+      "plugins": [
+        ["transform-runtime", {
+          "polyfill": false,
+          "regenerator": true
+        }]
+      ]
+    }
+  ]
+}
