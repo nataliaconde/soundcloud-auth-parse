@@ -1,60 +1,53 @@
-// Helper functions for accessing the Soundcloud API.
-var Parse = require('parse/node').Parse;
-var https = require('https')
+// Helper functions for accessing the SoundCloud API.
+const Parse = require('parse/node').Parse;
+const axios = require('axios')
 
-//validateToken
-function validateIdToken(id, token) {
-  return soundcloudRequest('me?oauth_token=' + token).then(response => {
-    if (response && response.id == id) {
-      return;
-    }
-    throw new Parse.Error(
+const validateIdToken = async (id, token) => {
+  try {
+    let response = await soundcloudRequest('me?oauth_token=' + token)
+    if (response && response.status === 200 && response.data && response.data.id === id) return;
+    else throw new Parse.Error(
       Parse.Error.OBJECT_NOT_FOUND,
       'Soundcloud auth is invalid for this user.'
     );
-  });
-}
-
-//AuthToken
-function validateAuthToken(id, token) {
-  return soundcloudRequest('me?oauth_token=' + token).then(response => {
-    if (response && response.id == id) {
-      return;
-    }
+  } catch(err) {
     throw new Parse.Error(
       Parse.Error.OBJECT_NOT_FOUND,
       'Soundcloud auth is invalid for this user.'
-    );
-  });
-}
-
-// Returns a promise that fulfills iff this user id is valid.
-function validateAuthData(authData) {
-  if (authData.id_token) {
-    return validateIdToken(authData.id, authData.id_token);
-  } else {
-    return validateAuthToken(authData.id, authData.access_token).then(
-      () => {
-        // Validation with auth token worked
-        return;
-      },
-      () => {
-        // Try with the id_token param
-        return validateIdToken(authData.id, authData.access_token);
-      }
     );
   }
 }
 
-// Returns a promise that fulfills iff this app id is valid.
-function validateAppId() {
-  return Promise.resolve();
+const validateAuthToken = async (id, token) => {
+  try {
+    let response = await soundcloudRequest('me?oauth_token=' + token)
+    if (response && response.status === 200 && response.data && response.data.id === id) return;
+    else throw new Parse.Error(
+      Parse.Error.OBJECT_NOT_FOUND,
+      'Soundcloud auth is invalid for this user.'
+    );
+  } catch(err) {
+    throw new Parse.Error(
+      Parse.Error.OBJECT_NOT_FOUND,
+      'Soundcloud auth is invalid for this user.'
+    );
+  }
 }
 
-// A promisey wrapper for api requests
-function soundcloudRequest(path) {
-  return https.get('https://api.soundcloud.com/' + path);
+const validateAuthData = async authData => {
+  try {
+    if (authData.id_token) return await validateIdToken(authData.id, authData.id_token);
+    else return await validateAuthToken(authData.id, authData.access_token)
+  } catch (err) {
+    // Try with the id_token param
+    return await validateIdToken(authData.id, authData.access_token);
+  }
 }
+
+const validateAppId = () => Promise.resolve()
+
+// Send a request to Sound Cloud to validate credentials
+const soundcloudRequest = path => axios.get('https://api.soundcloud.com/' + path)
 
 module.exports = {
   validateAppId: validateAppId,
