@@ -1,10 +1,11 @@
 {
   "name": "@nataliacs/soundcloud-auth-parse",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Soundcloud OAuth to Parse Server Adapter",
-  "main": "adapter.js",
+  "main": "lib/back/adapter.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src/ -d lib/ --copy-files",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,13 @@
   "dependencies": {
     "https": "^1.0.0",
     "parse": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "1.6.1"
   },
   "bugs": {
     "url": "https://github.com/nataliaconde/soundcloud-auth-parse/issues"
