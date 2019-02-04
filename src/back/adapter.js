@@ -2,10 +2,10 @@
 const Parse = require('parse/node').Parse;
 const axios = require('axios')
 
-const validateIdToken = async (id, token) => {
+const defaultValidator = async (id, token) => {
   try {
     let response = await soundcloudRequest('me?oauth_token=' + token)
-    if (response && response.status === 200 && response.data && response.data.id === id) return;
+    if (response && response.status == 200 && response.data && response.data.id == id) return;
     else throw new Parse.Error(
       Parse.Error.OBJECT_NOT_FOUND,
       'Soundcloud auth is invalid for this user.'
@@ -18,21 +18,9 @@ const validateIdToken = async (id, token) => {
   }
 }
 
-const validateAuthToken = async (id, token) => {
-  try {
-    let response = await soundcloudRequest('me?oauth_token=' + token)
-    if (response && response.status === 200 && response.data && response.data.id === id) return;
-    else throw new Parse.Error(
-      Parse.Error.OBJECT_NOT_FOUND,
-      'Soundcloud auth is invalid for this user.'
-    );
-  } catch(err) {
-    throw new Parse.Error(
-      Parse.Error.OBJECT_NOT_FOUND,
-      'Soundcloud auth is invalid for this user.'
-    );
-  }
-}
+const validateIdToken = defaultValidator
+
+const validateAuthToken = defaultValidator
 
 const validateAuthData = async authData => {
   try {
