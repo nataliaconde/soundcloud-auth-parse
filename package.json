@@ -1,6 +1,6 @@
 {
   "name": "@nataliacs/soundcloud-auth-parse",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Soundcloud OAuth to Parse Server Adapter",
   "main": "lib/back/adapter.js",
   "scripts": {
